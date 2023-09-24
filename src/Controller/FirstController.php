@@ -8,6 +8,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FirstController extends AbstractController
 {
+    #[route ('/template',name: 'template')]
+    public function template():Response{
+        return $this->render('template.html.twig');
+    }
+
     #[route ('/greet/{name}/{surname}',name: 'greetings')]
     public function greetings($name,$surname):Response{
        return $this->render('first/sayHello.html.twig',

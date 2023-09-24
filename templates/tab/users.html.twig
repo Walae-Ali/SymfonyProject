@@ -1,27 +1,31 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.css') }}">
-    <title>users</title>
-</head>
-<body>
+{% extends 'template.html.twig' %}
+{% block Title %}
+    users
+{% endblock %}
+{% block body %}
+    {{ include('fragments/Date_jour.html.twig') }}
+    <div class="alert alert-warning">
+        <a href="{{ path('app_tab',{nb:7}) }}"> stats tab</a>
+    </div>
 <table class="table">
     <tr class="table-active">
         <td>name</td>
         <td>firstname</td>
         <td>age</td>
+        <td>message</td>
     </tr>
     {% for user in users %}
     <tr class="{% if loop.index is odd  %} table-danger {% else%} table-warning{% endif%} " >
         <td>{{ user.name }}</td>
         <td>{{ user.firstname }}</td>
         <td>{{ user.age }}</td>
+        <td>
+            {{ render(controller('App\\Controller\\FirstController::greetings',{ name:user.firstname,surname:user.name })) }}
+        </td>
     </tr>
     {% endfor %}
 </table>
-</body>
-</html>
+{%  endblock %}
+{% block pageTitle %}
+    users
+{% endblock %}
